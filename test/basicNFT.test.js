@@ -6,6 +6,7 @@ describe("BasicNFT Unit Tests", () => {
 
     beforeEach(async () => {
         accounts = await ethers.getSigners();
+        // accounts = await getNamedAccounts();
         deployer = accounts[0];
         await deployments.fixture(["basicnft"]);
 
