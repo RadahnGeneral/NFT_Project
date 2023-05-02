@@ -5,7 +5,7 @@ pragma solidity >=0.6.0 <0.9.0;
 
 contract BasicNFT is ERC721 {
     string public constant TOKEN_URI =
-        "ipfs://bafybeig37ioir76s7mg5oobetncojcm3c3hxasyd4rvid4jqhy4gkaheg4/?filename=0-PUG.json";
+        "ipfs.io/ipfs/bafybeig37ioir76s7mg5oobetncojcm3c3hxasyd4rvid4jqhy4gkaheg4/?filename=0-PUG.json";
     uint private s_tokenCounter;
 
     constructor() ERC721("puppy", "PUP") {

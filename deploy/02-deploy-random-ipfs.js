@@ -32,6 +32,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     const { deployer } = await getNamedAccounts();
 
     const chainId = network.config.chainId;
+    let vrfCoordinatorV2Mock;
 
     if (process.env.UPLOAD_TO_PINATA == "true") {
         tokenUris = await handleTokenUris();
@@ -40,7 +41,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     let vrfCoordinatorV2Address, subscriptionId;
 
     if (developmentChains.includes(network.name)) {
-        const vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock");
+        vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock");
         vrfCoordinatorV2Address = vrfCoordinatorV2Mock.address;
 
         const tx = await vrfCoordinatorV2Mock.createSubscription();
@@ -69,7 +70,9 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
         log: true,
         waitConfirmations: network.config.blockConfirmations || 1,
     });
-    log("-----------------------------");
+
+    // await vrfCoordinatorV2Mock.addConsumer(subscriptionId, randomIpfsNft.address);
+    // log("-----------------------------");
 };
 
 async function handleTokenUris() {
